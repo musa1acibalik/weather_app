@@ -1,20 +1,60 @@
-<<<<<<< HEAD
-# weather_app
+# 🌤️ Weather App
 
-A new Flutter project.
+A simple Flutter weather application that displays current weather data for Turkish cities using the OpenWeatherMap API.
 
-## Getting Started
+## 📱 Screenshots
 
-This project is a starting point for a Flutter application.
+> Add your screenshots here
 
-A few resources to get you started if this is your first Flutter project:
+## ✨ Features
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- View current weather for 6 major Turkish cities (Ankara, İstanbul, İzmir, Bursa, Van, Antalya)
+- Displays temperature, weather description, humidity, and wind speed
+- Selected city is highlighted in the grid
+- Clean Material Design 3 UI
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-=======
-# weather_app
->>>>>>> 2efa3cb21558f2f24fd5f31a8e88b91ea5885b62
+## 🛠️ Tech Stack
+
+- **Flutter** — UI framework
+- **Dart** — Programming language
+- **Dio** — HTTP client for API requests
+- **OpenWeatherMap API** — Weather data provider
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Flutter SDK
+- An [OpenWeatherMap](https://openweathermap.org/) API key
+
+### Installation
+
+1. Clone the repo
+   ```bash
+   git clone https://github.com/musa1acibalik/weather_app.git
+   ```
+
+2. Install dependencies
+   ```bash
+   flutter pub get
+   ```
+
+3. Add your API key in `main.dart`
+   ```dart
+   "appid": "YOUR_API_KEY_HERE"
+   ```
+
+4. Run the app
+   ```bash
+   flutter run
+   ```
+
+## 📦 Dependencies
+
+```yaml
+dio: ^5.x.x
+```
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
