@@ -4,12 +4,20 @@ import 'package:weather_app/models/weather_model.dart';
 
 void main() => runApp(const weatherApp());
 
+// ignore: camel_case_types
 class weatherApp extends StatelessWidget {
   const weatherApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'Material App', home: HomePage()); // MaterialApp
+    return MaterialApp(
+      title: 'Material App',
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+      ),
+      home: HomePage(),
+    ); // MaterialApp
   }
 }
 
@@ -59,10 +67,55 @@ class _HomePageState extends State<HomePage> {
     return model;
   }
 
+  Widget _buildWeatherCard(WeatherModel weatherModel) {
+    return Card(
+      margin: EdgeInsets.all(16),
+      child: Padding(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          children: [
+            Text(
+              weatherModel.name!,
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            SizedBox(height: 8),
+            Text(
+              "${weatherModel.main!.temp!.round()}°",
+              style: Theme.of(context).textTheme.headlineLarge,
+            ),
+            SizedBox(height: 8),
+            Text(weatherModel.weather![0].description ?? "değer bulunamadı"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Column(
+                  children: [
+                    Icon(Icons.water_drop),
+                    Text(weatherModel.main!.humidity!.round().toString()),
+                  ],
+                ),
+                SizedBox(width: 32),
+                Column(
+                  children: [
+                    Icon(Icons.air),
+                    Text(weatherModel.wind!.speed!.round().toString()),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Material App Bar')), // AppBar
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text('Hava Durumu'),
+      ), // AppBar
       body: Column(
         children: [
           if (weatherFuture != null)
@@ -76,7 +129,7 @@ class _HomePageState extends State<HomePage> {
                   return Center(child: Text(snapshot.error.toString()));
                 }
                 if (snapshot.hasData) {
-                  return Card(child: Text(snapshot.data!.name!));
+                  return _buildWeatherCard(snapshot.data!);
                 }
                 return SizedBox();
               },
@@ -90,9 +143,16 @@ class _HomePageState extends State<HomePage> {
                 mainAxisSpacing: 16,
               ),
               itemBuilder: (context, index) {
+                final isSelected = secilenSehir == sehirler[index];
                 return GestureDetector(
                   onTap: () => selectedCity(sehirler[index]),
-                  child: Card(child: Center(child: Text(sehirler[index]))),
+                  child: Card(
+                    color:
+                        isSelected
+                            ? Theme.of(context).colorScheme.primaryContainer
+                            : null,
+                    child: Center(child: Text(sehirler[index])),
+                  ),
                 );
               },
               itemCount: sehirler.length,
